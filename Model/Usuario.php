@@ -31,18 +31,24 @@ class Usuario{
  * @return boolean
  */
     public function inserirBD(){
+        
         require_once 'ConexaoBD.php';
-
-        $conexao = new ConexaoBd();
+        $conexao = new ConexaoBD();
         $conn = $conexao->conectar();
-        if( $conn->connect_error){
+        if( $conn->connect_errno){
             die("Connection failed: " . $conn->connect_error);
         }
+        $sql = "SELECT nome FROM usuario WHERE nome ='". $this->nome."'";
+        $query = $conn->query($sql);
+        
+        $res = mysqli_fetch_assoc($query);// verifica se o nome já existe
+        if ($res['nome'] == $this->nome ){
+            return FALSE;
+        }
 
-        $sql = "INSERT INTO usuario (nome, cpf, email, senha) 
-        VALUES (' ".$this->nome."'.'".$this->cpf."'.'".$this->email."'.'" .$this->senha."')";
-
-        if( $conn->query($sql) === TRUE){
+        $sql = "INSERT INTO usuario (nome, cpf, email, senha)  
+        VALUES ('".$this->nome."','".$this->cpf."','".$this->email."','" .$this->senha."')";
+        if( $conn->query($sql)){
             $this->id = mysqli_insert_id($conn);
             $conn->close();
             return TRUE;
@@ -68,8 +74,7 @@ class Usuario{
         if( $conn->connect_error){
             die("Connection failed: " . $conn->connect_error);
         }
-
-         $sql = "SELECT * FROM usuario WHERE cpf = ".$cpf ;
+         $sql = "SELECT * FROM usuario WHERE cpf = '".$cpf."'" ;
          $re = $conn->query($sql);
          $r = $re->fetch_object();
          if ($r != null){

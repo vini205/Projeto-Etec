@@ -9,20 +9,24 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="primeiroAcesso.php" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-marginw3-display-middle" style="width: 30%;">
+    <?php
+define('__ROOT__', '/content/projeto_etec_final');
+
+?>
+    <form action="<?=__ROOT__.'/Controller/Navegacao.php'?>  " method="post" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin w3-display-middle" style="width: 30%;">
         <input type="hidden" name="nome_form" value="frmLogin"/>
         <h2 class="w3-center">Login</h2>
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:11%"><i class="w3-xxlarge fa fa-user"></i></div>
                 <div class="w3-rest">
-                    <input class="w3-input w3-border w3-round-large" name="txtLogin" type="text"
+                    <input class="w3-input w3-border w3-round-large" required name="txtLogin" type="text"
                     placeholder="Login CPF (ex.: 33333333333)">
                 </div>
         </div>
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:11%"><i class="w3-xxlarge fa fa-lock"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border w3-round-large" name="txtSenha" type="password"placeholder="Senha">
+                <input class="w3-input w3-border w3-round-large" required  name="txtSenha" type="password"placeholder="Senha">
             </div>
         </div>
         <div class="w3-row w3-section">
@@ -30,7 +34,7 @@
             <button name="btnLogin" class="w3-button w3-block w3-margin w3-blue w3-cell w3-round-large" style="width: 90%;">Entrar</button>
         </div>
             <div class="w3-half">
-            <button name="btnPrimeiroAcesso" class="w3-button w3-block w3-margin w3-blue w3-cellw3-roundlarge" style="width: 90%;">Primeiro Acesso?</button>
+            <button name="btnPrimeiroAcesso" class="w3-button w3-block w3-margin w3-blue w3-cell w3-roundlarge" style="width: 90%;">Primeiro Acesso?</button>
             </div>
         </div>
 </form>

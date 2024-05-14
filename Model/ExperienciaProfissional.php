@@ -36,16 +36,16 @@ class ExperienciaProfissional{
     public function inserirBD(){
         require_once 'ConexaoBD.php';
 
-        $conexao = new ConexaoBd();
+        $conexao = new ConexaoBD();
         $conn = $conexao->conectar();
         if( $conn->connect_error){
             die("Connection failed: " . $conn->connect_error);
         }
         
-        $sql = "INSERT INTO experienciarprofissional (idexperienciaprofissional, idusuario, inicio, fim, empresa, descricao) 
-        VALUES (' ".$this->id."'.'".$this->idusuario."'.'".$this->inicio."'.'" .$this->fim."', '". $this->empresa."','" . $this->descricao . "')";
+        $sql = "INSERT INTO experienciaprofissional ( idusuario, inicio, fim, empresa, descricao) 
+        VALUES ('".$this->idusuario."','".$this->inicio."','" .$this->fim."', '". $this->empresa."','". $this->descricao ."')";
             
-    
+        echo $sql;
         if( $conn->query($sql) === TRUE){
             $this->id = mysqli_insert_id($conn);
             $conn->close();
@@ -90,10 +90,10 @@ class ExperienciaProfissional{
      * Retorna um ou mais regristros como resultado da query.
      *
      * @param [int] $idusuario
-     * @return boolean Caso `TRUE` os dados foram atualizados no *BD*,
+     * @return object Caso `TRUE` os dados foram atualizados no *BD*,
      * caso `FALSE` a atualização não foi realizada.
      */
-    public function listarFormacoes($idusuario)
+    public function listarExperiencias($idusuario)
     {
         require_once 'ConexaoBD.php';
 
@@ -103,7 +103,7 @@ class ExperienciaProfissional{
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM experienciaprofissional WHERE idusuario = '". $idusuairo."'";
+        $sql = "SELECT * FROM experienciaprofissional WHERE idusuario = '". $idusuario."'";
 
         $re = $conn->query($sql);
         $conn->close();

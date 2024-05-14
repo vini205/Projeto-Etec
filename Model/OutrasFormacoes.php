@@ -1,6 +1,9 @@
 <?php
 
-class OutrasFormações{
+/**
+ * Classe model para Outras formações.
+ */
+class OutrasFormacoes{
 
     /** @var int */
     private $id;
@@ -33,16 +36,13 @@ class OutrasFormações{
  */
 public function inserirBD(){
     require_once 'ConexaoBD.php';
-
-    $conexao = new ConexaoBd();
+    $conexao = new ConexaoBD();
     $conn = $conexao->conectar();
     if( $conn->connect_error){
         die("Connection failed: " . $conn->connect_error);
     }
-
-    $sql = "INSERT INTO outrasformacoes (idoutrasformacoes,idusuario, inicio, fim, descricao) 
-    VALUES (' ".$this->id."'.'".$this->id_usuario."'.'".$this->inicio."'.'" .$this->fim."','". $this->descricao ."')";
-
+    $sql = "INSERT INTO outrasformacoes (idusuario, inicio, fim, descricao) 
+    VALUES ('".$this->id_usuario."','".$this->inicio."','" .$this->fim."','". $this->descricao ."')";
 
     if( $conn->query($sql) === TRUE){
         $this->id = mysqli_insert_id($conn);
@@ -89,20 +89,19 @@ public function inserirBD(){
      * Retorna um ou mais regristros como resultado da query.
      *
      * @param [int] $idusuario
-     * @return boolean Caso `TRUE` os dados foram atualizados no *BD*,
+     * @return object Caso `TRUE` os dados foram atualizados no *BD*,
      * caso `FALSE` a atualização não foi realizada.
      */
     public function listarFormacoes($idusuario)
     {
         require_once 'ConexaoBD.php';
-
         $conexao = new ConexaoBD();
         $conn = $conexao->conectar();
         if( $conn->connect_error){
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM outrasformacoes WHERE idusuario = '". $idusuairo."'";
+        $sql = "SELECT * FROM outrasformacoes WHERE idusuario = '". $idusuario."'";
 
         $re = $conn->query($sql);
         $conn->close();

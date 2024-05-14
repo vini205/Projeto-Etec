@@ -46,11 +46,11 @@ public function inserirBD(){
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO formacaoAcademica (idusuario, inicio, fim, descricao) 
-    VALUES (' ".$this->idusuario."'.'".$this->inicio."'.'".$this->fim."'.'" .$this->descricao."')";
+    $sql = "INSERT INTO formacaoAcademica (idusuario, inicio, fim, descricao)  VALUES ('".$this->idusuario."','".$this->inicio."','".$this->fim."','" .$this->descricao."')";
 
 
     if( $conn->query($sql) === TRUE){
+        
         $this->id = mysqli_insert_id($conn);
         $conn->close();
         return TRUE;
@@ -93,7 +93,7 @@ public function inserirBD(){
      * Retorna um ou mais regristros como resultado da query.
      *
      * @param [int] $idusuario
-     * @return boolean Caso `TRUE` os dados foram atualizados no *BD*,
+     * @return object Caso `TRUE` os dados foram pegos     no *BD* e retorna os dados,
      * caso `FALSE` a atualização não foi realizada.
      */
     public function listarFormacoes($idusuario)
@@ -106,8 +106,8 @@ public function inserirBD(){
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM formacaoAcademica WHERE idusuario = '". $idusuairo."'";
-
+        $sql = "SELECT * FROM formacaoAcademica WHERE idusuario = '". $idusuario."'";
+        //echo $sql;
         $re = $conn->query($sql);
         $conn->close();
         return $re;
