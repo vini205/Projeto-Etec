@@ -14,7 +14,7 @@
     w3-display-middle" style="width: 30%;">
         <div class="w3-row w3-section">
             <button name="btnCadRealizado" class="w3-button w3-block w3-margin w3-blue w3-cell w3-roundlarge" 
-            style="width: 90%;">Cadastro Realizado Com Sucesso!</button>
+            style="width: 90%;">Atualização Realizada Com Sucesso!</button>
         </div>
     </form>
 </body>

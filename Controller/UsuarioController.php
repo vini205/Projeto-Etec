@@ -64,6 +64,14 @@ possível a transferência de dados entres as páginas. Assim, finalizamos o mé
         return $r;
     }
 
+
+    /**
+     * Faz o login do usuário
+     *
+     * @param [type] $cpf
+     * @param [type] $senha
+     * @return bool
+     */
     public function login($cpf, $senha)
     {
         require_once '../Model/Usuario.php';
@@ -78,4 +86,36 @@ possível a transferência de dados entres as páginas. Assim, finalizamos o mé
             return false;
         }
     }
+
+
+    /**
+     * Gera uma requisição para o Model usuário para
+     * listar os usuários
+     *
+     * @return object
+     */
+    public function gerarLista()
+    {
+        require_once '../Model/Usuario.php';
+        $usuario = new Usuario();
+
+        return $results = $usuario->listaCadastrados();
+    }
+
+    /**
+     * Gera uma requisição para a Model usuário
+     * para pegar os dados de um único usuário via Id.
+     * 
+     *
+     * @param [type] $id
+     * @return object
+     */
+    public function listarDados($id){
+        require_once '../Model/Usuario.php';
+        $usuario = new Usuario();
+
+        return $results = $usuario->listarDados($id);
+    }
+
 }
+

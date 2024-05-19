@@ -84,7 +84,7 @@
     <div class="w3-padding-128 w3-content w3-text-grey w3-center" id="dPessoais">
         <h2 class="darkblueText">Dados Pessoais</h2>
         <form action="/Controller/Navegacao.php" method="post" class="w3-row w3-light-grey darkblueText w3-margin" >
-            <input class="w3-input w3-border w3-round-large" name="txtID" type="hidden" value="<?php echo unserialize($_SESSION['Usuario'])->getID();?>" > 
+            <input class="w3-input w3-border w3-round-large" name="txtID" type="hidden" value="<?php echo unserialize($_SESSION['Usuario'])->getId();?>" > 
 
             
             

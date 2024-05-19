@@ -4,7 +4,7 @@ if(!isset($_SESSION))
 {
 session_start();
 }
-echo 'Navegation';
+//echo 'Navegation';
 
 switch ($_POST) {
     case isset($_POST[null]):
@@ -96,7 +96,7 @@ dos inputs preenchidos pelo usuário para o objeto usuário e tentando realizar 
         $fController = new FormacaoAcadController();
         
         if ($fController->remover($_POST["id"])) {
-            echo 2;
+            
             include_once "../View/secundarios/informacaoExcluida.php";
         } else {
             include_once "../View/secundarios/operacaoNaoRealizda.php";
@@ -154,11 +154,44 @@ dos inputs preenchidos pelo usuário para o objeto usuário e tentando realizar 
         require_once  "../Controller/OutrasFormacoesController.php";
         require_once "../Model/Usuario.php";
         $oFController = new OutrasFormacoesController();
-        echo $_POST['idOF'];
+        
         if ($oFController->remover($_POST["idOF"])) {
             include_once "../View/secundarios/informacaoExcluida.php";
         } else {
             include_once "../View/secundarios/operacaoNaoRealizada.php";
         }
         break;
-}
+
+            /*LOGIN ADM*/
+    case isset($_POST["btnLoginADM"]):
+        require_once '../Controller/AdministradorController.php';
+        $aController = new AdministradorController();
+        
+        if($aController->login($_POST['txtLoginADM'], $_POST['txtSenhaADM']))
+        {
+            include_once '../View/ADM/ADMPrincipal.php';
+        }else{
+            include_once "../View/secundarios/cadastroNaoRealizado.php";
+        }  
+        break;
+
+     case(isset($_POST["btnADM"])):
+        include_once '../View/ADM/ADMLogin.php';
+     break;
+     case isset($_POST["btnListarCadastrados"]):
+        case isset($_POST['btnVoltarLista']):
+        include_once '../View/ADM/ListarCadastrados.php';
+        break;
+    case isset($_POST["btnListarAdministradores"]):
+        include_once '../View/ADM/ADMListarAdministradores.php';
+        break;
+    case isset($_POST['btnVoltar']):
+        include_once '../View/ADM/ADMPrincipal.php';
+
+        break;
+    case isset($_POST['btnVisualizarUsuario']):
+        
+        include_once '../View/ADM/VisualizarUsuario.php';
+        break;
+
+    }
